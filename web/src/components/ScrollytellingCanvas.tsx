@@ -81,11 +81,11 @@ export default function ScrollytellingCanvas({ scrollProgress }: ScrollytellingC
     let drawWidth, drawHeight;
     
     if (canvasRatio > imgRatio) {
-      drawHeight = canvas.height;
-      drawWidth = img.width * (canvas.height / img.height);
-    } else {
       drawWidth = canvas.width;
       drawHeight = img.height * (canvas.width / img.width);
+    } else {
+      drawHeight = canvas.height;
+      drawWidth = img.width * (canvas.height / img.height);
     }
     
     const x = (canvas.width - drawWidth) / 2;
