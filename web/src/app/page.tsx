@@ -3,6 +3,8 @@
 import { useScroll, useTransform, motion } from "framer-motion";
 import { useRef } from "react";
 import ScrollytellingCanvas from "@/components/ScrollytellingCanvas";
+import Gallery from "@/components/Gallery";
+import ColorCustomizer from "@/components/ColorCustomizer";
 
 export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -23,7 +25,8 @@ export default function Home() {
 
 
   return (
-    <main ref={containerRef} className="relative h-[1200vh] bg-black">
+    <main className="bg-black text-white selection:bg-white/20">
+      <div ref={containerRef} className="relative h-[1200vh] bg-black">
       <div className="sticky top-0 h-screen w-full overflow-hidden">
         
         <ScrollytellingCanvas scrollProgress={scrollYProgress} />
@@ -65,6 +68,10 @@ export default function Home() {
           </motion.div>
         </div>
       </div>
+      </div>
+      
+      <ColorCustomizer />
+      <Gallery />
     </main>
   );
 }
