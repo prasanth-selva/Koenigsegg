@@ -1,101 +1,89 @@
-import Image from "next/image";
+"use client";
+
+import { useScroll, useTransform, motion } from "framer-motion";
+import { useRef } from "react";
+import ScrollytellingCanvas from "@/components/ScrollytellingCanvas";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const containerRef = useRef<HTMLDivElement>(null);
+  
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"]
+  });
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.1, 0.2], [1, 1, 0]);
+  const heroY = useTransform(scrollYProgress, [0, 0.1, 0.2], [0, 0, -50]);
+
+  const feat1Opacity = useTransform(scrollYProgress, [0.15, 0.25, 0.35, 0.45], [0, 1, 1, 0]);
+  const feat1Y = useTransform(scrollYProgress, [0.15, 0.25, 0.35, 0.45], [50, 0, 0, -50]);
+
+  const feat2Opacity = useTransform(scrollYProgress, [0.45, 0.55, 0.65, 0.75], [0, 1, 1, 0]);
+  const feat2Y = useTransform(scrollYProgress, [0.45, 0.55, 0.65, 0.75], [50, 0, 0, -50]);
+
+  const ctaOpacity = useTransform(scrollYProgress, [0.85, 0.95, 1], [0, 1, 1]);
+  const ctaY = useTransform(scrollYProgress, [0.85, 0.95, 1], [50, 0, 0]);
+
+  return (
+    <main ref={containerRef} className="relative h-[400vh] bg-black">
+      <div className="sticky top-0 h-screen w-full overflow-hidden">
+        
+        <ScrollytellingCanvas scrollProgress={scrollYProgress} />
+        
+        <div className="absolute inset-0 pointer-events-none">
+          {/* Section 1: Hero */}
+          <motion.div 
+            style={{ opacity: heroOpacity, y: heroY }}
+            className="absolute inset-0 flex flex-col items-center justify-center text-center p-8"
           >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-white/90 mb-4">
+              Koenigsegg Regera
+            </h1>
+            <p className="text-lg md:text-2xl text-white/60 tracking-wider font-light max-w-xl">
+              Engineering beyond imagination. The pinnacle of hybrid hypercars.
+            </p>
+          </motion.div>
+
+          {/* Section 2: Feature 1 */}
+          <motion.div 
+            style={{ opacity: feat1Opacity, y: feat1Y }}
+            className="absolute inset-0 flex flex-col items-start justify-center p-12 md:p-24"
           >
-            Read our docs
-          </a>
+            <h2 className="text-4xl md:text-5xl font-semibold tracking-tight text-white/90 mb-4">
+              Intricate Disassembly
+            </h2>
+            <p className="text-xl md:text-2xl text-white/60 font-light max-w-md leading-relaxed">
+              Every detail meticulously crafted. Witness the seamless separation of the aerodynamic exoskeleton.
+            </p>
+          </motion.div>
+
+          {/* Section 3: Feature 2 */}
+          <motion.div 
+            style={{ opacity: feat2Opacity, y: feat2Y }}
+            className="absolute inset-0 flex flex-col items-end justify-center text-right p-12 md:p-24"
+          >
+            <h2 className="text-4xl md:text-5xl font-semibold tracking-tight text-white/90 mb-4">
+              Direct Drive Powertrain
+            </h2>
+            <p className="text-xl md:text-2xl text-white/60 font-light max-w-md leading-relaxed">
+              A revolutionary hybrid system laid bare. Uncompromising power, uncompromising performance.
+            </p>
+          </motion.div>
+
+          {/* Section 4: CTA */}
+          <motion.div 
+            style={{ opacity: ctaOpacity, y: ctaY }}
+            className="absolute inset-0 flex flex-col items-center justify-center text-center p-8"
+          >
+            <h2 className="text-5xl md:text-6xl font-bold tracking-tight text-white/90 mb-8">
+              Experience Perfection
+            </h2>
+            <button className="pointer-events-auto px-8 py-4 bg-white text-black font-semibold tracking-widest uppercase text-sm rounded-full hover:bg-white/90 transition-colors">
+              Discover More
+            </button>
+          </motion.div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      </div>
+    </main>
   );
 }
