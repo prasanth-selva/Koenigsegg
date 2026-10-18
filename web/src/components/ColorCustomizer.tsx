@@ -4,9 +4,9 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const colors = [
-  { id: "red", name: "Cherry Red", hex: "#7E0D1B", bg: "#1f0307", image: "/colors/car_red.png" },
-  { id: "blue", name: "Sapphire Blue", hex: "#001D4A", bg: "#020b1c", image: "/colors/car_blue.png" },
-  { id: "silver", name: "Liquid Silver", hex: "#C0C0C0", bg: "#1a1a1a", image: "/colors/car_silver.png" },
+  { id: "red", name: "Cherry Red", hex: "#7E0D1B", bg: "#1f0307", image: "/colors/car_red.webp" },
+  { id: "blue", name: "Sapphire Blue", hex: "#001D4A", bg: "#020b1c", image: "/colors/car_blue.webp" },
+  { id: "silver", name: "Liquid Silver", hex: "#C0C0C0", bg: "#1a1a1a", image: "/colors/car_silver.webp" },
 ];
 
 export default function ColorCustomizer() {

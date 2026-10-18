@@ -1,11 +1,12 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 const images = [
-  { src: "/gallery/gallery_front.png", alt: "Hypercar Front Angle", style: "col-span-12 md:col-span-8 aspect-[16/9]" },
-  { src: "/gallery/gallery_rear.png", alt: "Hypercar Rear Angle", style: "col-span-12 md:col-span-4 aspect-[4/5] md:aspect-auto" },
-  { src: "/gallery/gallery_interior.png", alt: "Hypercar Interior", style: "col-span-12 aspect-[21/9]" },
+  { src: "/gallery/gallery_front.webp", alt: "Hypercar Front Angle", style: "col-span-12 md:col-span-8 aspect-[16/9]" },
+  { src: "/gallery/gallery_rear.webp", alt: "Hypercar Rear Angle", style: "col-span-12 md:col-span-4 aspect-[4/5] md:aspect-auto" },
+  { src: "/gallery/gallery_interior.webp", alt: "Hypercar Interior", style: "col-span-12 aspect-[21/9]" },
 ];
 
 export default function Gallery() {
@@ -38,9 +39,11 @@ export default function Gallery() {
               className={`relative overflow-hidden rounded-2xl group ${img.style}`}
             >
               <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500 z-10" />
-              <img 
+              <Image
                 src={img.src} 
                 alt={img.alt} 
+                fill
+                sizes="(max-width: 768px) 100vw, 66vw"
                 className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out" 
               />
             </motion.div>
