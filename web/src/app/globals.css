@@ -9,6 +9,17 @@
   }
 }
 
+html.sequence-loading,
+body.sequence-loading {
+  height: 100%;
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
+body.sequence-loading {
+  touch-action: none;
+}
+
 body {
   background-color: var(--background);
   color: var(--foreground);
